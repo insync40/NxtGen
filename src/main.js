@@ -46,7 +46,7 @@ const heroHomeWrap = () => {
 
       ScrollTrigger.create({
         trigger: wrap,
-        start: "top 1%",
+        start: "top top",
         // NEW: This property ensures the trigger only runs once.
         once: true,
 
@@ -89,7 +89,7 @@ const heroStartupWrap = () => {
 
       ScrollTrigger.create({
         trigger: wrap,
-        start: "top 1%",
+        start: "top top",
         // NEW: This property ensures the trigger only runs once.
         once: true,
 
@@ -132,7 +132,7 @@ const heroStudentWrap = () => {
 
       ScrollTrigger.create({
         trigger: wrap,
-        start: "top 1%",
+        start: "top top",
         // NEW: This property ensures the trigger only runs once.
         once: true,
 
@@ -175,7 +175,7 @@ const heroTrainingWrap = () => {
 
       ScrollTrigger.create({
         trigger: wrap,
-        start: "top 1%",
+        start: "top top",
         // NEW: This property ensures the trigger only runs once.
         once: true,
 
@@ -271,7 +271,7 @@ const ctaRiveWrap = () => {
 
         ScrollTrigger.create({
           trigger: wrap,
-          start: "top 90%",
+          start: "top top",
           // NEW: This property ensures the trigger only runs once.
           once: true,
 
@@ -296,14 +296,14 @@ const founderStartUpWrap = () => {
   if (!wrap) return;
   const cards = wrap.querySelectorAll(".founder_card");
   const RIVEURL =
-    "https://cdn.prod.website-files.com/68fb2e0a66d0bbf01ed68cbb/6909a61af4d5b80cd8e23a31_6b0ce4421dc102c78919a63a44280f37_insync-nxtgen-startup.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/6911b4195c69d14b33902301_insync-nxtgen-startup.riv";
 
   const artboard = [
+    "startup-strategy",
+    "admin-operation",
     "tech_ai-integration",
     "sales_crm",
     "branding_marketing",
-    "startup-strategy",
-    "admin-operation",
   ];
 
   const sm = "State Machine 1";
@@ -328,7 +328,7 @@ const founderStartUpWrap = () => {
 
         ScrollTrigger.create({
           trigger: wrap,
-          start: "top 90%",
+          start: "top top",
           // NEW: This property ensures the trigger only runs once.
           once: true,
 
@@ -350,12 +350,12 @@ const journeyStartUpWrap = () => {
   if (!wrap) return;
   const cards = wrap.querySelectorAll(".journey_card");
   const RIVEURL =
-    "https://cdn.prod.website-files.com/68fb2e0a66d0bbf01ed68cbb/6909a61af4d5b80cd8e23a31_6b0ce4421dc102c78919a63a44280f37_insync-nxtgen-startup.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/6911b4195c69d14b33902301_insync-nxtgen-startup.riv";
 
   const artboard = [
     "call-discovery",
     "proposal-roadmap",
-    "ai_student",
+    "ai_student 2",
     "routin-checkins",
   ];
 
@@ -380,7 +380,7 @@ const journeyStartUpWrap = () => {
 
         ScrollTrigger.create({
           trigger: wrap,
-          start: "top 90%",
+          start: "top top",
           // NEW: This property ensures the trigger only runs once.
           once: true,
 
@@ -405,7 +405,7 @@ const studentRiveWrap = () => {
   if (!wrap) return;
   const cards = wrap.querySelectorAll(".student_card");
   const RIVEURL =
-    "https://cdn.prod.website-files.com/68fb2e0a66d0bbf01ed68cbb/6909af408dd7a566ec30a6cb_insync-nxtgen-students.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/6911b419ae3e32d0a96a125a_insync-nxtgen-students.riv";
 
   const artboard = [
     "mentors-training",
@@ -434,7 +434,7 @@ const studentRiveWrap = () => {
 
         ScrollTrigger.create({
           trigger: wrap,
-          start: "top 90%",
+          start: "top top",
           // NEW: This property ensures the trigger only runs once.
           once: true,
 
@@ -483,7 +483,7 @@ const studentProcessWrap = () => {
 
         ScrollTrigger.create({
           trigger: wrap,
-          start: "top 90%",
+          start: "top top",
           once: true,
 
           onEnter: () => {
@@ -1015,47 +1015,94 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Rotating Text
-document.addEventListener("DOMContentLoaded", function () {
-  // Pilih elemen yang akan dianimasikan
-  const rotatingTextInner = document.querySelector(".rotating-text-inner");
-  const texts = gsap.utils.toArray(".rotating-text-inner span");
+// document.addEventListener("DOMContentLoaded", function () {
+//   // Pilih elemen yang akan dianimasikan
+//   const rotatingTextInner = document.querySelector(".rotating-text-inner");
+//   const texts = gsap.utils.toArray(".rotating-text-inner span");
 
-  // Durasi setiap teks ditampilkan (dalam detik)
-  const displayTime = 2;
-  // Durasi animasi transisi (dalam detik)
-  const animationTime = 0.5;
+//   // Durasi setiap teks ditampilkan (dalam detik)
+//   const displayTime = 2;
+//   // Durasi animasi transisi (dalam detik)
+//   const animationTime = 0.5;
 
-  // Membuat timeline GSAP
-  let tl = gsap.timeline({
-    repeat: -1, // -1 berarti loop selamanya
-    defaults: {
-      duration: animationTime,
-      ease: "power2.inOut", // Efek easing untuk transisi yang lebih halus
-    },
-  });
+//   // Membuat timeline GSAP
+//   let tl = gsap.timeline({
+//     repeat: -1, // -1 berarti loop selamanya
+//     defaults: {
+//       duration: animationTime,
+//       ease: "power2.inOut", // Efek easing untuk transisi yang lebih halus
+//     },
+//   });
 
-  // Loop melalui setiap teks (kecuali yang terakhir, karena itu hanya duplikat)
-  // Kita ingin bergerak sebanyak (jumlah teks asli) kali.
-  for (let i = 0; i < texts.length - 1; i++) {
-    tl.to(rotatingTextInner, {
-      // Gunakan yPercent agar pergerakan responsif terhadap tinggi elemen
-      yPercent: `-${(100 / texts.length) * (i + 1)}`,
-      // Tambahkan jeda agar setiap teks sempat terbaca
-      delay: displayTime,
+//   // Loop melalui setiap teks (kecuali yang terakhir, karena itu hanya duplikat)
+//   // Kita ingin bergerak sebanyak (jumlah teks asli) kali.
+//   for (let i = 0; i < texts.length - 1; i++) {
+//     tl.to(rotatingTextInner, {
+//       // Gunakan yPercent agar pergerakan responsif terhadap tinggi elemen
+//       yPercent: `-${(100 / texts.length) * (i + 1)}`,
+//       // Tambahkan jeda agar setiap teks sempat terbaca
+//       delay: displayTime,
+//     });
+//   }
+
+//   // Setelah animasi terakhir selesai, kita perlu langsung reset posisi ke awal
+//   // tanpa animasi. Kita tambahkan fungsi ini di akhir timeline.
+//   tl.to(rotatingTextInner, {
+//     duration: 0, // Tidak ada durasi untuk reset
+//     yPercent: 0, // Kembali ke posisi awal
+//     delay: displayTime, // Beri waktu untuk menampilkan teks terakhir sebelum reset
+//   });
+// });
+
+const words = document.querySelectorAll("#hero-highlight > span");
+
+const ACTIVE_TIME = 2; // seconds each word stays active before the next starts
+const IN_DUR = 1; // entrance animation duration (s)
+const OUT_DUR = 1; // exit animation duration (s)
+// new slot: time between the start of consecutive transitions (active + exit)
+const SLOT = ACTIVE_TIME + OUT_DUR;
+
+let main = gsap.timeline({ repeat: -1 });
+
+for (let i = 0; i < words.length; i++) {
+  // schedule each word so the next word's entrance overlaps the current word's exit
+  // entrance start = i * SLOT - OUT_DUR  (special-case i === 0)
+  let delay = i === 0 ? 0 : i * SLOT - OUT_DUR;
+  let wordTL = gsap.timeline();
+
+  if (i !== 0) {
+    // entrance animation starts at the timeline start (global delay places it)
+    wordTL.from(words[i], {
+      duration: IN_DUR,
+      yPercent: -100,
+      opacity: 0,
+      color: "rgba(38, 44, 60, 0.20)",
+      ease: "power2.out",
     });
+  } else {
+    // first word: make it visible immediately (no entrance)
+    gsap.set(words[0], { opacity: 1, yPercent: 0 });
   }
 
-  // Setelah animasi terakhir selesai, kita perlu langsung reset posisi ke awal
-  // tanpa animasi. Kita tambahkan fungsi ini di akhir timeline.
-  tl.to(rotatingTextInner, {
-    duration: 0, // Tidak ada durasi untuk reset
-    yPercent: 0, // Kembali ke posisi awal
-    delay: displayTime, // Beri waktu untuk menampilkan teks terakhir sebelum reset
-  });
-});
+  // after the entrance (if any) hold the word for ACTIVE_TIME, then animate out
+  // using `+=${ACTIVE_TIME}` ensures exit starts ACTIVE_TIME after entrance end (or after t=0 for first word)
+  wordTL.to(
+    words[i],
+    {
+      duration: OUT_DUR,
+      yPercent: 100,
+      color: "rgba(38, 44, 60, 0.20)",
+      opacity: 0,
+      ease: "power2.out",
+    },
+    `+=${ACTIVE_TIME}`
+  );
+
+  main.add(wordTL, delay);
+}
 
 function animateScalingIcons() {
-  const items = document.querySelectorAll("[data-scroll-animation^='icon']");
+  const items = document.querySelectorAll("[data-scroll-animation='icon']");
 
   items.forEach((item) => {
     const animationType = item.dataset.scrollAnimation;
