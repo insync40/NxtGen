@@ -1,16 +1,18 @@
 import { Rive } from "@rive-app/webgl2";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import Lenis from "lenis";
 
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(MotionPathPlugin);
 
 // DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
   launchWrap();
-  heroHomeWrap();
-  heroStartupWrap();
-  heroStudentWrap();
+  // heroHomeWrap();
+  // heroStartupWrap();
+  // heroStudentWrap();
   heroTrainingWrap();
   ctaRiveWrap();
   founderStartUpWrap();
@@ -198,7 +200,7 @@ const launchWrap = () => {
   if (!wrap) return;
   const cards = wrap.querySelectorAll(".launch_card");
   const RIVEURL =
-    "https://cdn.prod.website-files.com/68fb2e0a66d0bbf01ed68cbb/69088665524f55e959598b3b_insync-nxtgen-homepage.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/690b1782545546334ac44c79_152f7a2de0731b32ed50a47d9463f568_insync-nxtgen-homepage.riv";
 
   const artboard = ["startup", "student", "programs"];
   const sm = "State Machine 1";
@@ -296,7 +298,7 @@ const founderStartUpWrap = () => {
   if (!wrap) return;
   const cards = wrap.querySelectorAll(".founder_card");
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/6911b4195c69d14b33902301_insync-nxtgen-startup.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/6911b4195c69d14b33902301_e31c854ffaa8b884019149be16f68cd8_insync-nxtgen-startup.riv";
 
   const artboard = [
     "startup-strategy",
@@ -350,12 +352,12 @@ const journeyStartUpWrap = () => {
   if (!wrap) return;
   const cards = wrap.querySelectorAll(".journey_card");
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/6911b4195c69d14b33902301_insync-nxtgen-startup.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/6911b4195c69d14b33902301_e31c854ffaa8b884019149be16f68cd8_insync-nxtgen-startup.riv";
 
   const artboard = [
     "call-discovery",
     "proposal-roadmap",
-    "ai_student 2",
+    "ai_student",
     "routin-checkins",
   ];
 
@@ -405,7 +407,7 @@ const studentRiveWrap = () => {
   if (!wrap) return;
   const cards = wrap.querySelectorAll(".student_card");
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/6911b419ae3e32d0a96a125a_insync-nxtgen-students.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/6911b419ae3e32d0a96a125a_aefc4152a945bdb6590f9525488245a1_insync-nxtgen-students.riv";
 
   const artboard = [
     "mentors-training",
@@ -457,7 +459,7 @@ const studentProcessWrap = () => {
   if (!wrap) return;
   const cards = wrap.querySelectorAll(".process_2_card");
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/690b1782545546334ac44c9a_ff12f63de1a24df7699b13a9a2d1713e_insync-nxtgen-students.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/6911b419ae3e32d0a96a125a_aefc4152a945bdb6590f9525488245a1_insync-nxtgen-students.riv";
 
   const artboard = "complete-the-journey";
 
@@ -1175,4 +1177,123 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   lenis.scrollTo(0, 0);
+});
+
+// ====================
+// HERO PATH ANIMATION
+// ====================
+
+function heroStudentPathAnimation() {
+  const masterTimeline = gsap.timeline({ repeat: -1, repeatDelay: 0 });
+
+  masterTimeline.to("#progress-bar-student", {
+    duration: 6,
+    ease: "none",
+    motionPath: {
+      path: "#path1",
+      align: "#path1",
+      autoRotate: true,
+      alignOrigin: [0.5, 0.5],
+    },
+  });
+
+  masterTimeline.to("#progress-bar-student", {
+    duration: 3,
+    ease: "none",
+    motionPath: {
+      path: "#path2",
+      align: "#path2",
+      autoRotate: true,
+      alignOrigin: [0.5, 0.5],
+    },
+  });
+}
+
+function heroHomepagePathAnimation() {
+  const masterTimeline = gsap.timeline({ repeat: -1, repeatDelay: 0 });
+
+  masterTimeline.to("#progress-bar-homepage", {
+    duration: 6,
+    ease: "none",
+    motionPath: {
+      path: "#path1",
+      align: "#path1",
+      autoRotate: true,
+      alignOrigin: [0.5, 0.5],
+      start: 0,
+      end: 0.8,
+    },
+  });
+
+  masterTimeline.to("#progress-bar-homepage", {
+    duration: 3,
+    ease: "none",
+    motionPath: {
+      path: "#path2",
+      align: "#path2",
+      autoRotate: true,
+      alignOrigin: [0.5, 0.5],
+    },
+  });
+}
+
+function heroStartupPathAnimation() {
+  gsap.to("#progress-bar-startup", {
+    duration: 5,
+    ease: "none",
+    repeat: -1,
+    repeatDelay: 1,
+    motionPath: {
+      path: "#motionPath",
+      align: "#motionPath",
+      autoRotate: true,
+      alignOrigin: [0.5, 0.5],
+    },
+  });
+}
+// ====================
+// COUNT-UP ANIMATION
+// ====================
+
+function countUp() {
+  const countUpObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const el = entry.target;
+        const target = parseInt(el.textContent, 10);
+        const duration = 1500;
+        let start = null;
+
+        const step = (timestamp) => {
+          if (!start) start = timestamp;
+          const progress = Math.min((timestamp - start) / duration, 1);
+
+          el.textContent = Math.floor(progress * (2 - progress) * target) + "+";
+
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = target + "+";
+          }
+        };
+
+        requestAnimationFrame(step);
+        observer.unobserve(el);
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  document.querySelectorAll('[data-number="count"]').forEach((item) => {
+    countUpObserver.observe(item);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  heroStartupPathAnimation();
+  heroHomepagePathAnimation();
+  heroStudentPathAnimation();
+  countUp();
 });
