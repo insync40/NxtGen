@@ -11,17 +11,12 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, "src/main.js"),
-        home: resolve(__dirname, "src/pages/home.js"),
-        contact: resolve(__dirname, "src/pages/contact.js"),
-        startup: resolve(__dirname, "src/pages/startup.js"),
-        student: resolve(__dirname, "src/pages/student.js"),
       },
       output: {
         entryFileNames: "[name].js",
         chunkFileNames: "[name].js",
         assetFileNames: "[name].[ext]",
-        // format: "iife",
-        inlineDynamicImports: false,
+        format: "iife",
       },
     },
     reportCompressedSize: true,
