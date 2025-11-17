@@ -1,19 +1,32 @@
+// ...existing code...
 import { defineConfig } from "vite";
 import glsl from "vite-plugin-glsl";
-import { glob } from "glob";
-import { resolve } from "path";
-import path from "path";
+import { resolve, relative, dirname } from "path";
+import { readdirSync, statSync } from "fs";
 import { fileURLToPath } from "url";
 
-// Get the directory name of the current module
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// Find all .js files in the src directory
-const jsFiles = glob.sync("src/**/*.js").reduce((acc, file) => {
-  const name = path.basename(file, ".js");
-  acc[name] = fileURLToPath(new URL(file, import.meta.url));
-  return acc;
-}, {});
+function collectEntries(dir, baseDir = dir) {
+  const entries = {};
+  for (const name of readdirSync(dir)) {
+    const full = resolve(dir, name);
+    const stat = statSync(full);
+    if (stat.isDirectory()) {
+      Object.assign(entries, collectEntries(full, baseDir));
+    } else if (/\.(js|css)$/.test(name)) {
+      // keep relative path (without extension) so output preserves folder structure, e.g. pages/contact -> dist/pages/contact.js
+      const rel = relative(baseDir, full)
+        .replace(/\\+/g, "/")
+        .replace(/\.(js|css)$/, "");
+      entries[rel] = full;
+    }
+  }
+  return entries;
+}
+
+const srcDir = resolve(__dirname, "src");
+const inputEntries = collectEntries(srcDir);
 
 export default defineConfig({
   base: "./",
@@ -22,16 +35,14 @@ export default defineConfig({
     outDir: "dist",
     minify: "terser",
     rollupOptions: {
-      input: {
-        main: resolve(__dirname, "src/main.js"),
-        ...jsFiles,
-      },
+      // include every .js and .css file under src as an entry
+      input: inputEntries,
       output: {
+        // preserve names and folder structure from the input keys
         entryFileNames: "[name].js",
         chunkFileNames: "[name].js",
         assetFileNames: "[name].[ext]",
         // format: "iife",
-        inlineDynamicImports: false,
       },
     },
     reportCompressedSize: true,
@@ -54,3 +65,4 @@ export default defineConfig({
     cors: true,
   },
 });
+// ...existing code...
