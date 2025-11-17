@@ -8,36 +8,26 @@ import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Dynamically get all JS files in src directory
-const getInputFiles = async () => {
-  const files = await glob("src/**/*.js", { cwd: __dirname });
-  const input = {};
-
-  files.forEach((file) => {
-    const name = file
-      .replace("src/", "")
-      .replace(".js", "")
-      .replace(/\//g, "-");
-    input[name] = resolve(__dirname, file);
-  });
-
-  return input;
-};
-
-export default defineConfig(async () => ({
+export default defineConfig({
   base: "./",
   plugins: [glsl()],
   build: {
     outDir: "dist",
     minify: "terser",
     rollupOptions: {
-      input: await getInputFiles(),
+      input: {
+        main: resolve(__dirname, "src/main.js"),
+        index: resolve(__dirname, "src/index.js"),
+        home: resolve(__dirname, "src/pages/home.js"),
+        startup: resolve(__dirname, "src/pages/startup.js"),
+        student: resolve(__dirname, "src/pages/student.js"),
+        contact: resolve(__dirname, "src/pages/contact.js"),
+      },
       output: {
         entryFileNames: "[name].js",
         chunkFileNames: "[name].js",
         assetFileNames: "[name].[ext]",
-        // format: "iife",
-        inlineDynamicImports: false,
+        format: "iife",
       },
     },
     reportCompressedSize: true,
@@ -60,4 +50,4 @@ export default defineConfig(async () => ({
     port: 4173,
     cors: true,
   },
-}));
+});
