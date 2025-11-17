@@ -10,6 +10,7 @@
 		"watch": "vite build --watch"
 	},
 	"devDependencies": {
+		"glob": "^11.0.3",
 		"terser": "^5.44.0",
 		"vite": "^7.1.9"
 	},
