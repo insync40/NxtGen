@@ -22,177 +22,424 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // HERO RIVE
+
 const heroHomeWrap = () => {
   const wrap = document.querySelector(".hero_main_wrap");
   if (!wrap) return;
+
   const visual = wrap.querySelector("[data-visual-hero='home']");
+  if (!visual) return;
+
   const RIVEURL =
     "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/690d6a99cf606d0c4cd5cb3a_insync-nxtgen-hero.riv";
 
   const artboard = "home";
-  const sm = "State Machine 1";
+  const STATE_MACHINE = "State Machine 1";
 
-  let mm = gsap.matchMedia();
+  gsap.context(() => {
+    let instance;
 
-  const r = new Rive({
-    src: RIVEURL,
-    canvas: visual,
-    stateMachines: sm,
-    artboard: artboard,
-    autoplay: true,
-    isTouchScrollEnabled: true,
-    onLoad: () => {
-      r.resizeDrawingSurfaceToCanvas();
-      const inputs = r.stateMachineInputs(sm);
-      const playTrigger = inputs.find((i) => i.name === "play");
+    function playInstance(inst) {
+      if (!inst) return;
+      try {
+        const inputs = inst.stateMachineInputs(STATE_MACHINE) || [];
+        const playTrigger = inputs.find((i) => i.name === "play");
+        if (playTrigger && typeof playTrigger.fire === "function") {
+          playTrigger.fire();
+        }
+      } catch (e) {}
+      try {
+        if (typeof inst.play === "function") inst.play();
+      } catch (e) {}
+    }
 
-      ScrollTrigger.create({
-        trigger: wrap,
-        start: "top top",
-        // NEW: This property ensures the trigger only runs once.
-        once: true,
+    function pauseInstance(inst) {
+      if (!inst) return;
+      try {
+        if (typeof inst.pause === "function") inst.pause();
+        else if (typeof inst.stop === "function") inst.stop();
+      } catch (e) {}
+    }
 
-        onEnter: () => {
-          if (playTrigger) {
-            playTrigger.fire();
-          }
+    try {
+      instance = new Rive({
+        src: RIVEURL,
+        canvas: visual,
+        stateMachines: STATE_MACHINE,
+        artboard: artboard,
+        autoplay: false,
+        isTouchScrollEnabled: true,
+        onLoad: () => {
+          try {
+            instance.resizeDrawingSurfaceToCanvas();
+          } catch (e) {}
+        },
+        onLoadError: (err) => {
+          console.error("Rive loading error:", err);
         },
       });
-    },
-    onLoadError: (err) => {
-      console.error("Rive loading error:", err);
-    },
-  });
+    } catch (err) {
+      console.error("Failed to create Rive instance:", err);
+      return;
+    }
+
+    ScrollTrigger.create({
+      trigger: wrap,
+      start: "top 90%",
+      end: "bottom top",
+      onEnter: () => playInstance(instance),
+      onEnterBack: () => playInstance(instance),
+      onLeave: () => pauseInstance(instance),
+      onLeaveBack: () => pauseInstance(instance),
+    });
+
+    return () => {
+      if (!instance) return;
+      try {
+        if (typeof instance.destroy === "function") instance.destroy();
+        else if (typeof instance.cleanup === "function") instance.cleanup();
+        else if (typeof instance.stop === "function") instance.stop();
+      } catch (e) {}
+      instance = null;
+    };
+  }, wrap);
 };
+
+// const heroHomeWrap = () => {
+//   const wrap = document.querySelector(".hero_main_wrap");
+//   if (!wrap) return;
+//   const visual = wrap.querySelector("[data-visual-hero='home']");
+//   const RIVEURL =
+//     "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/690d6a99cf606d0c4cd5cb3a_insync-nxtgen-hero.riv";
+
+//   const artboard = "home";
+//   const sm = "State Machine 1";
+
+//   let mm = gsap.matchMedia();
+
+//   const r = new Rive({
+//     src: RIVEURL,
+//     canvas: visual,
+//     stateMachines: sm,
+//     artboard: artboard,
+//     autoplay: true,
+//     isTouchScrollEnabled: true,
+//     onLoad: () => {
+//       r.resizeDrawingSurfaceToCanvas();
+//       const inputs = r.stateMachineInputs(sm);
+//       const playTrigger = inputs.find((i) => i.name === "play");
+
+//       ScrollTrigger.create({
+//         trigger: wrap,
+//         start: "top top",
+//         // NEW: This property ensures the trigger only runs once.
+//         once: true,
+
+//         onEnter: () => {
+//           if (playTrigger) {
+//             playTrigger.fire();
+//           }
+//         },
+//       });
+//     },
+//     onLoadError: (err) => {
+//       console.error("Rive loading error:", err);
+//     },
+//   });
+// };
+
 
 const heroStartupWrap = () => {
   const wrap = document.querySelector(".startup_main_wrap");
   if (!wrap) return;
+
   const visual = wrap.querySelector("[data-visual-hero='startup']");
+  if (!visual) return;
+
   const RIVEURL =
     "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/690d6a99cf606d0c4cd5cb3a_insync-nxtgen-hero.riv";
 
   const artboard = "startups";
-  const sm = "State Machine 1";
+  const STATE_MACHINE = "State Machine 1";
 
-  let mm = gsap.matchMedia();
+  gsap.context(() => {
+    let instance;
 
-  const r = new Rive({
-    src: RIVEURL,
-    canvas: visual,
-    stateMachines: sm,
-    artboard: artboard,
-    autoplay: true,
-    isTouchScrollEnabled: true,
-    onLoad: () => {
-      r.resizeDrawingSurfaceToCanvas();
-      const inputs = r.stateMachineInputs(sm);
-      const playTrigger = inputs.find((i) => i.name === "play");
+    function playInstance(inst) {
+      if (!inst) return;
+      try {
+        const inputs = inst.stateMachineInputs(STATE_MACHINE) || [];
+        const playTrigger = inputs.find((i) => i.name === "play");
+        if (playTrigger && typeof playTrigger.fire === "function") {
+          playTrigger.fire();
+        }
+      } catch (e) {}
+      try {
+        if (typeof inst.play === "function") inst.play();
+      } catch (e) {}
+    }
 
-      ScrollTrigger.create({
-        trigger: wrap,
-        start: "top top",
-        // NEW: This property ensures the trigger only runs once.
-        once: true,
+    function pauseInstance(inst) {
+      if (!inst) return;
+      try {
+        if (typeof inst.pause === "function") inst.pause();
+        else if (typeof inst.stop === "function") inst.stop();
+      } catch (e) {}
+    }
 
-        onEnter: () => {
-          if (playTrigger) {
-            playTrigger.fire();
-          }
+    try {
+      instance = new Rive({
+        src: RIVEURL,
+        canvas: visual,
+        stateMachines: STATE_MACHINE,
+        artboard: artboard,
+        autoplay: false,
+        isTouchScrollEnabled: true,
+        onLoad: () => {
+          try {
+            instance.resizeDrawingSurfaceToCanvas();
+          } catch (e) {}
+        },
+        onLoadError: (err) => {
+          console.error("Rive loading error:", err);
         },
       });
-    },
-    onLoadError: (err) => {
-      console.error("Rive loading error:", err);
-    },
-  });
+    } catch (err) {
+      console.error("Failed to create Rive instance:", err);
+      return;
+    }
+
+    ScrollTrigger.create({
+      trigger: wrap,
+      start: "top 90%",
+      end: "bottom top",
+      onEnter: () => playInstance(instance),
+      onEnterBack: () => playInstance(instance),
+      onLeave: () => pauseInstance(instance),
+      onLeaveBack: () => pauseInstance(instance),
+    });
+
+    return () => {
+      if (!instance) return;
+      try {
+        if (typeof instance.destroy === "function") instance.destroy();
+        else if (typeof instance.cleanup === "function") instance.cleanup();
+        else if (typeof instance.stop === "function") instance.stop();
+      } catch (e) {}
+      instance = null;
+    };
+  }, wrap);
 };
+// const heroStartupWrap = () => {
+//   const wrap = document.querySelector(".startup_main_wrap");
+//   if (!wrap) return;
+//   const visual = wrap.querySelector("[data-visual-hero='startup']");
+//   const RIVEURL =
+//     "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/690d6a99cf606d0c4cd5cb3a_insync-nxtgen-hero.riv";
+
+//   const artboard = "startups";
+//   const sm = "State Machine 1";
+
+//   let mm = gsap.matchMedia();
+
+//   const r = new Rive({
+//     src: RIVEURL,
+//     canvas: visual,
+//     stateMachines: sm,
+//     artboard: artboard,
+//     autoplay: true,
+//     isTouchScrollEnabled: true,
+//     onLoad: () => {
+//       r.resizeDrawingSurfaceToCanvas();
+//       const inputs = r.stateMachineInputs(sm);
+//       const playTrigger = inputs.find((i) => i.name === "play");
+
+//       ScrollTrigger.create({
+//         trigger: wrap,
+//         start: "top top",
+//         // NEW: This property ensures the trigger only runs once.
+//         once: true,
+
+//         onEnter: () => {
+//           if (playTrigger) {
+//             playTrigger.fire();
+//           }
+//         },
+//       });
+//     },
+//     onLoadError: (err) => {
+//       console.error("Rive loading error:", err);
+//     },
+//   });
+// };
+
 
 const heroStudentWrap = () => {
   const wrap = document.querySelector(".student_main_wrap");
   if (!wrap) return;
+
   const visual = wrap.querySelector("[data-visual-hero='students']");
+  if (!visual) return;
+
   const RIVEURL =
     "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/690d6a99cf606d0c4cd5cb3a_insync-nxtgen-hero.riv";
 
   const artboard = "students";
-  const sm = "State Machine 1";
+  const STATE_MACHINE = "State Machine 1";
 
-  let mm = gsap.matchMedia();
+  gsap.context(() => {
+    let instance;
 
-  const r = new Rive({
-    src: RIVEURL,
-    canvas: visual,
-    stateMachines: sm,
-    artboard: artboard,
-    autoplay: true,
-    isTouchScrollEnabled: true,
-    onLoad: () => {
-      r.resizeDrawingSurfaceToCanvas();
-      const inputs = r.stateMachineInputs(sm);
-      const playTrigger = inputs.find((i) => i.name === "play");
+    function playInstance(inst) {
+      if (!inst) return;
+      try {
+        const inputs = inst.stateMachineInputs(STATE_MACHINE) || [];
+        const playTrigger = inputs.find((i) => i.name === "play");
+        if (playTrigger && typeof playTrigger.fire === "function") {
+          playTrigger.fire();
+        }
+      } catch (e) {}
+      try {
+        if (typeof inst.play === "function") inst.play();
+      } catch (e) {}
+    }
 
-      ScrollTrigger.create({
-        trigger: wrap,
-        start: "top top",
-        // NEW: This property ensures the trigger only runs once.
-        once: true,
+    function pauseInstance(inst) {
+      if (!inst) return;
+      try {
+        if (typeof inst.pause === "function") inst.pause();
+        else if (typeof inst.stop === "function") inst.stop();
+      } catch (e) {}
+    }
 
-        onEnter: () => {
-          if (playTrigger) {
-            playTrigger.fire();
-          }
+    try {
+      instance = new Rive({
+        src: RIVEURL,
+        canvas: visual,
+        stateMachines: STATE_MACHINE,
+        artboard: artboard,
+        autoplay: false,
+        isTouchScrollEnabled: true,
+        onLoad: () => {
+          try {
+            instance.resizeDrawingSurfaceToCanvas();
+          } catch (e) {}
+        },
+        onLoadError: (err) => {
+          console.error("Rive loading error:", err);
         },
       });
-    },
-    onLoadError: (err) => {
-      console.error("Rive loading error:", err);
-    },
-  });
+    } catch (err) {
+      console.error("Failed to create Rive instance:", err);
+      return;
+    }
+
+    ScrollTrigger.create({
+      trigger: wrap,
+      start: "top 90%",
+      end: "bottom top",
+      onEnter: () => playInstance(instance),
+      onEnterBack: () => playInstance(instance),
+      onLeave: () => pauseInstance(instance),
+      onLeaveBack: () => pauseInstance(instance),
+    });
+
+    return () => {
+      if (!instance) return;
+      try {
+        if (typeof instance.destroy === "function") instance.destroy();
+        else if (typeof instance.cleanup === "function") instance.cleanup();
+        else if (typeof instance.stop === "function") instance.stop();
+      } catch (e) {}
+      instance = null;
+    };
+  }, wrap);
 };
+// const heroStudentWrap = () => {
+//   const wrap = document.querySelector(".student_main_wrap");
+//   if (!wrap) return;
+//   const visual = wrap.querySelector("[data-visual-hero='students']");
+//   const RIVEURL =
+//     "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/690d6a99cf606d0c4cd5cb3a_insync-nxtgen-hero.riv";
 
-const heroTrainingWrap = () => {
-  const wrap = document.querySelector(".training_main_wrap");
-  if (!wrap) return;
-  const visual = wrap.querySelector("[data-visual-hero='training']");
-  const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/690d6a99cf606d0c4cd5cb3a_insync-nxtgen-hero.riv";
+//   const artboard = "students";
+//   const sm = "State Machine 1";
 
-  const artboard = "nxtgen-training";
-  const sm = "State Machine 2";
+//   let mm = gsap.matchMedia();
 
-  let mm = gsap.matchMedia();
+//   const r = new Rive({
+//     src: RIVEURL,
+//     canvas: visual,
+//     stateMachines: sm,
+//     artboard: artboard,
+//     autoplay: true,
+//     isTouchScrollEnabled: true,
+//     onLoad: () => {
+//       r.resizeDrawingSurfaceToCanvas();
+//       const inputs = r.stateMachineInputs(sm);
+//       const playTrigger = inputs.find((i) => i.name === "play");
 
-  const r = new Rive({
-    src: RIVEURL,
-    canvas: visual,
-    stateMachines: sm,
-    artboard: artboard,
-    autoplay: true,
-    isTouchScrollEnabled: true,
-    onLoad: () => {
-      r.resizeDrawingSurfaceToCanvas();
-      const inputs = r.stateMachineInputs(sm);
-      const playTrigger = inputs.find((i) => i.name === "play");
+//       ScrollTrigger.create({
+//         trigger: wrap,
+//         start: "top top",
+//         // NEW: This property ensures the trigger only runs once.
+//         once: true,
 
-      ScrollTrigger.create({
-        trigger: wrap,
-        start: "top top",
-        // NEW: This property ensures the trigger only runs once.
-        once: true,
+//         onEnter: () => {
+//           if (playTrigger) {
+//             playTrigger.fire();
+//           }
+//         },
+//       });
+//     },
+//     onLoadError: (err) => {
+//       console.error("Rive loading error:", err);
+//     },
+//   });
+// };
 
-        onEnter: () => {
-          if (playTrigger) {
-            playTrigger.fire();
-          }
-        },
-      });
-    },
-    onLoadError: (err) => {
-      console.error("Rive loading error:", err);
-    },
-  });
-};
+// const heroTrainingWrap = () => {
+//   const wrap = document.querySelector(".training_main_wrap");
+//   if (!wrap) return;
+//   const visual = wrap.querySelector("[data-visual-hero='training']");
+//   const RIVEURL =
+//     "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/690d6a99cf606d0c4cd5cb3a_insync-nxtgen-hero.riv";
+
+//   const artboard = "nxtgen-training";
+//   const sm = "State Machine 2";
+
+//   let mm = gsap.matchMedia();
+
+//   const r = new Rive({
+//     src: RIVEURL,
+//     canvas: visual,
+//     stateMachines: sm,
+//     artboard: artboard,
+//     autoplay: true,
+//     isTouchScrollEnabled: true,
+//     onLoad: () => {
+//       r.resizeDrawingSurfaceToCanvas();
+//       const inputs = r.stateMachineInputs(sm);
+//       const playTrigger = inputs.find((i) => i.name === "play");
+
+//       ScrollTrigger.create({
+//         trigger: wrap,
+//         start: "top top",
+//         // NEW: This property ensures the trigger only runs once.
+//         once: true,
+
+//         onEnter: () => {
+//           if (playTrigger) {
+//             playTrigger.fire();
+//           }
+//         },
+//       });
+//     },
+//     onLoadError: (err) => {
+//       console.error("Rive loading error:", err);
+//     },
+//   });
+// };
 
 // Homepage
 function launchWrap() {
@@ -355,7 +602,6 @@ function launchWrap() {
 // Homepage END
 
 // CTA
-
 const ctaRiveWrap = () => {
   const wrap = document.querySelector(".step_wrap");
   if (!wrap) return;
@@ -499,7 +745,6 @@ const ctaRiveWrap = () => {
 // CTA END
 
 // Startup Page
-
 const founderStartUpWrap = () => {
   const wrap = document.querySelector(".founder_wrap");
   if (!wrap) return;
