@@ -1,7 +1,6 @@
 import { Rive } from "@rive-app/webgl2";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "lenis";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,9 +20,9 @@ const heroStudentWrap = () => {
   if (!visual) return;
 
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/690d6a99cf606d0c4cd5cb3a_insync-nxtgen-hero.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691ab9557e29ec20028be734_3a3e409e77710aadd4ff7bd784c4f6d4_insync-nxtgen-students_adj.riv";
 
-  const artboard = "students";
+  const artboard = "hero";
   const STATE_MACHINE = "State Machine 1";
 
   gsap.context(() => {
@@ -103,7 +102,7 @@ const studentRiveWrap = () => {
   if (!cards.length) return;
 
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/6911b419ae3e32d0a96a125a_aefc4152a945bdb6590f9525488245a1_insync-nxtgen-students.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691ab9557e29ec20028be734_3a3e409e77710aadd4ff7bd784c4f6d4_insync-nxtgen-students_adj.riv";
 
   const artboards = [
     "mentors-training",
@@ -202,7 +201,7 @@ const studentProcessWrap = () => {
   if (!cards.length) return;
 
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/6911b419ae3e32d0a96a125a_aefc4152a945bdb6590f9525488245a1_insync-nxtgen-students.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691ab9557e29ec20028be734_3a3e409e77710aadd4ff7bd784c4f6d4_insync-nxtgen-students_adj.riv";
 
   const artboard = "complete-the-journey";
   const STATE_MACHINE = "State Machine 1";
