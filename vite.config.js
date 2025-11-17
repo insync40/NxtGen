@@ -1,6 +1,28 @@
 import { defineConfig } from "vite";
 import glsl from "vite-plugin-glsl";
 import { resolve } from "path";
+import { glob } from "glob";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Dynamically get all JS files in src directory
+const getInputFiles = async () => {
+  const files = await glob("src/**/*.js", { cwd: __dirname });
+  const input = {};
+
+  files.forEach((file) => {
+    const name = file
+      .replace("src/", "")
+      .replace(".js", "")
+      .replace(/\//g, "-");
+    input[name] = resolve(__dirname, file);
+  });
+
+  return input;
+};
 
 export default defineConfig({
   base: "./",
@@ -9,14 +31,12 @@ export default defineConfig({
     outDir: "dist",
     minify: "terser",
     rollupOptions: {
-      input: {
-        main: resolve(__dirname, "src/main.js"),
-      },
+      input: await getInputFiles(),
       output: {
         entryFileNames: "[name].js",
         chunkFileNames: "[name].js",
         assetFileNames: "[name].[ext]",
-        format: "iife",
+        inlineDynamicImports: false,
       },
     },
     reportCompressedSize: true,
@@ -33,7 +53,7 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
-    allowedHosts: ["*.loca.lt", "abila-it.loca.lt", "dev.indrampd.web.id"],
+    allowedHosts: ["*"],
   },
   preview: {
     port: 4173,
