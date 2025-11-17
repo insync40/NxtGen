@@ -1,48 +1,43 @@
-// ...existing code...
 import { defineConfig } from "vite";
 import glsl from "vite-plugin-glsl";
-import { resolve, relative, dirname } from "path";
-import { readdirSync, statSync } from "fs";
+import { resolve } from "path";
+import { glob } from "glob";
 import { fileURLToPath } from "url";
+import { dirname } from "path";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-function collectEntries(dir, baseDir = dir) {
-  const entries = {};
-  for (const name of readdirSync(dir)) {
-    const full = resolve(dir, name);
-    const stat = statSync(full);
-    if (stat.isDirectory()) {
-      Object.assign(entries, collectEntries(full, baseDir));
-    } else if (/\.(js|css)$/.test(name)) {
-      // keep relative path (without extension) so output preserves folder structure, e.g. pages/contact -> dist/pages/contact.js
-      const rel = relative(baseDir, full)
-        .replace(/\\+/g, "/")
-        .replace(/\.(js|css)$/, "");
-      entries[rel] = full;
-    }
-  }
-  return entries;
-}
+// Dynamically get all JS files in src directory
+const getInputFiles = async () => {
+  const files = await glob("src/**/*.js", { cwd: __dirname });
+  const input = {};
 
-const srcDir = resolve(__dirname, "src");
-const inputEntries = collectEntries(srcDir);
+  files.forEach((file) => {
+    const name = file
+      .replace("src/", "")
+      .replace(".js", "")
+      .replace(/\//g, "-");
+    input[name] = resolve(__dirname, file);
+  });
 
-export default defineConfig({
+  return input;
+};
+
+export default defineConfig(async () => ({
   base: "./",
   plugins: [glsl()],
   build: {
     outDir: "dist",
     minify: "terser",
     rollupOptions: {
-      // include every .js and .css file under src as an entry
-      input: inputEntries,
+      input: await getInputFiles(),
       output: {
-        // preserve names and folder structure from the input keys
         entryFileNames: "[name].js",
         chunkFileNames: "[name].js",
         assetFileNames: "[name].[ext]",
         // format: "iife",
+        inlineDynamicImports: false,
       },
     },
     reportCompressedSize: true,
@@ -59,9 +54,10 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
+    allowedHosts: ["*"],
   },
   preview: {
     port: 4173,
     cors: true,
   },
-});
+}));
