@@ -21,7 +21,7 @@ const heroStartupWrap = () => {
   if (!visual) return;
 
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691ab955b2ec1fdd283f41a1_insync-nxtgen-startup_adj.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691c032ae8ca6948caa96965_insync-nxtgen-startup__18nov.riv";
 
   const artboard = "hero";
   const STATE_MACHINE = "State Machine 1";
@@ -103,7 +103,7 @@ const founderStartUpWrap = () => {
   if (!cards.length) return;
 
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691ab955b2ec1fdd283f41a1_insync-nxtgen-startup_adj.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691c032ae8ca6948caa96965_insync-nxtgen-startup__18nov.riv";
 
   const artboards = [
     "startup-strategy",
@@ -204,7 +204,7 @@ const journeyStartUpWrap = () => {
   if (!cards.length) return;
 
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691ab955b2ec1fdd283f41a1_insync-nxtgen-startup_adj.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691c032ae8ca6948caa96965_insync-nxtgen-startup__18nov.riv";
 
   const artboards = [
     "call-discovery",

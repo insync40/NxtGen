@@ -20,7 +20,7 @@ const heroStudentWrap = () => {
   if (!visual) return;
 
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691ab9557e29ec20028be734_3a3e409e77710aadd4ff7bd784c4f6d4_insync-nxtgen-students_adj.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691c032a5b68b3c1d8d2aa8d_insync-nxtgen-students_18nov.riv";
 
   const artboard = "hero";
   const STATE_MACHINE = "State Machine 1";
@@ -102,7 +102,7 @@ const studentRiveWrap = () => {
   if (!cards.length) return;
 
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691ab9557e29ec20028be734_3a3e409e77710aadd4ff7bd784c4f6d4_insync-nxtgen-students_adj.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691c032a5b68b3c1d8d2aa8d_insync-nxtgen-students_18nov.riv";
 
   const artboards = [
     "mentors-training",
@@ -201,7 +201,7 @@ const studentProcessWrap = () => {
   if (!cards.length) return;
 
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691ab9557e29ec20028be734_3a3e409e77710aadd4ff7bd784c4f6d4_insync-nxtgen-students_adj.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691c032a5b68b3c1d8d2aa8d_insync-nxtgen-students_18nov.riv";
 
   const artboard = "complete-the-journey";
   const STATE_MACHINE = "State Machine 1";

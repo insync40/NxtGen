@@ -21,7 +21,7 @@ const heroHomeWrap = () => {
   if (!visual) return;
 
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/690b1782545546334ac44c79_42f5938e5e36f64d17b9ca5befa9702e_insync-nxtgen-homepage.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691c032a363ba4eb3b98caf5_insync-nxtgen-homepage_18nov.riv";
 
   const artboard = "home";
   const STATE_MACHINE = "State Machine 1";
@@ -103,7 +103,7 @@ function launchWrap() {
   if (!cards.length) return;
 
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/690b1782545546334ac44c79_42f5938e5e36f64d17b9ca5befa9702e_insync-nxtgen-homepage.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691c032a363ba4eb3b98caf5_insync-nxtgen-homepage_18nov.riv";
 
   const artboards = ["startup", "student", "programs"];
   const STATE_MACHINE = "State Machine 1";
