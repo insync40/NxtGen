@@ -21,7 +21,7 @@ const heroHomeWrap = () => {
   if (!visual) return;
 
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691c847d82703d09660bab25_insync-nxtgen-homepage_ent.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691d22bac17a0f6dacf71d63_insync-nxtgen-homepage_final.riv";
 
   const artboard = "home";
   const STATE_MACHINE = "State Machine 1";

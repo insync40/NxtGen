@@ -20,7 +20,7 @@ const heroStudentWrap = () => {
   if (!visual) return;
 
   const RIVEURL =
-    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691c032a5b68b3c1d8d2aa8d_insync-nxtgen-students_18nov.riv";
+    "https://cdn.prod.website-files.com/690b1782545546334ac44bb0/691d22bae284c14edec56949_insync-nxtgen-students_final.riv";
 
   const artboard = "hero";
   const STATE_MACHINE = "State Machine 1";
